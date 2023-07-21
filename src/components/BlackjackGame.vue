@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Hand from "./Hand.vue"; // Hand component handles the display of player's and dealer's hands
+import Hand from "./BlackjackHand.vue"; // Hand component handles the display of player's and dealer's hands
 import Chips from "./Chips.vue"; // Chips component handles the display and management of chips
 
 export default {
