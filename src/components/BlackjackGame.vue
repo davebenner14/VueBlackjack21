@@ -33,7 +33,8 @@ import BlackjackChips from "./BlackjackChips.vue";
 import GameButtons from "./GameButtons.vue";
 import GameStatus from "./GameStatus.vue";
 import { createAndShuffleDeck } from "./DeckManager";
-import { calculateHandValue } from "./CardUtils";
+import { hitPlayer } from "./PlayerManager";
+import { standDealer } from "./DealerManager";
 
 export default {
   data() {
@@ -56,18 +57,16 @@ export default {
       this.playerHand = [this.drawCard(), this.drawCard()];
     },
     hit() {
-      this.playerHand.push(this.drawCard());
-      if (calculateHandValue(this.playerHand) > 21) {
-        this.message = "Player Busted!";
-        this.gameOver = true;
-      }
+      let result = hitPlayer(this.playerHand, this.drawCard);
+      this.playerHand = result.playerHand;
+      this.message = result.message;
+      this.gameOver = result.gameOver;
     },
     stand() {
-      while (calculateHandValue(this.dealerHand) < 17) {
-        this.dealerHand.push(this.drawCard());
-      }
-      this.gameOver = calculateHandValue(this.dealerHand) > 21 ? true : false;
-      this.message = this.gameOver ? "Dealer Busted!" : "";
+      let result = standDealer(this.dealerHand, this.drawCard);
+      this.dealerHand = result.dealerHand;
+      this.message = result.message;
+      this.gameOver = result.gameOver;
       if (!this.gameOver) {
         this.resolveGame();
       }
