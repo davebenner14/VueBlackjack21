@@ -26,6 +26,7 @@ export const blackjackGameLogic = {
       // States to manage the flow of the game
       gameStarted: false,
       gameOver: false,
+      message: "", // The message to display to the player
     };
   },
   methods: {
@@ -40,6 +41,9 @@ export const blackjackGameLogic = {
       // Draw two cards for both dealer and player
       this.dealerHand = [this.drawCard(), this.drawCard()];
       this.playerHand = [this.drawCard(), this.drawCard()];
+
+      // Check for blackjack
+      this.checkForBlackjack();
     },
 
     // Perform a hit action (PlayerManager.js)
@@ -48,6 +52,11 @@ export const blackjackGameLogic = {
       let result = hitPlayer(this.playerHand, this.drawCard);
       this.playerHand = result.playerHand;
       this.gameOver = result.gameOver;
+
+      // If game is over after player's hit, resolve the game
+      if (this.gameOver) {
+        this.resolveGame();
+      }
     },
 
     // Perform a stand action (DealerManager.js)
@@ -57,10 +66,8 @@ export const blackjackGameLogic = {
       this.dealerHand = result.dealerHand;
       this.gameOver = result.gameOver;
 
-      // If game is not over after dealer's turn, resolve the game
-      if (!this.gameOver) {
-        this.resolveGame();
-      }
+      // Resolve the game
+      this.resolveGame();
     },
 
     // Restart the game
@@ -70,6 +77,7 @@ export const blackjackGameLogic = {
       this.gameStarted = false;
       this.dealerHand = [];
       this.playerHand = [];
+      this.message = "";
     },
 
     // Draw a card from the deck (DeckManager.js)
@@ -89,11 +97,28 @@ export const blackjackGameLogic = {
       } else if (dealerValue > playerValue) {
         this.message = "Dealer wins!";
       } else {
-        this.message = "It's a tie!";
+        this.message = "It's a push!";
       }
 
       // Mark the game as over
       this.gameOver = true;
+    },
+
+    // Check for blackjack at the start of the game
+    checkForBlackjack() {
+      let playerValue = calculateHandValue(this.playerHand);
+      let dealerValue = calculateHandValue(this.dealerHand);
+
+      if (playerValue === 21 && dealerValue !== 21) {
+        this.message = "Player got a Blackjack!";
+        this.gameOver = true;
+      } else if (dealerValue === 21 && playerValue !== 21) {
+        this.message = "Dealer got a Blackjack!";
+        this.gameOver = true;
+      } else if (dealerValue === 21 && playerValue === 21) {
+        this.message = "It's a push, both player and dealer got a Blackjack!";
+        this.gameOver = true;
+      }
     },
   },
 };

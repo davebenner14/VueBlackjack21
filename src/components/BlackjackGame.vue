@@ -4,15 +4,12 @@
     <h1 class="game-title">Vue Blackjack 21</h1>
 
     <!-- Dealer's Hand -->
-    <!-- This uses the BlackjackHand.vue component to display the dealer's hand -->
     <BlackjackHand :cards="dealerHand" title="Dealer's Hand" />
 
     <!-- Player's Hand -->
-    <!-- This uses the BlackjackHand.vue component to display the player's hand -->
     <BlackjackHand :cards="playerHand" title="Player's Hand" />
 
     <!-- Buttons and Game Status -->
-    <!-- GameButtons.vue is used to display the buttons for game actions (start, hit, stand, restart) -->
     <GameButtons
       :gameStarted="gameStarted"
       :gameOver="gameOver"
@@ -23,44 +20,52 @@
     />
 
     <!-- Game Status -->
-    <!-- GameStatus.vue is used to display the current status of the game -->
     <GameStatus :message="message" />
 
     <!-- Chips -->
-    <!-- BlackjackChips.vue is used to display the current number of chips and the current bet -->
     <BlackjackChips :chips="chips" :bet="bet" />
+
+    <!-- Betting Form -->
+    <form @submit.prevent="placeBet(bet)">
+      <input v-model.number="bet" type="number" min="0" max="chips" />
+      <button type="submit">Place Bet</button>
+    </form>
   </div>
 </template>
 
 <script>
 // Import components
-import BlackjackHand from "./BlackjackHand.vue"; // A component for displaying a hand of cards
-import BlackjackChips from "./BlackjackChips.vue"; // A component for displaying the player's chips and current bet
-import GameButtons from "./GameButtons.vue"; // A component for displaying the game's action buttons
-import GameStatus from "./GameStatus.vue"; // A component for displaying the game's status
+import BlackjackHand from "./BlackjackHand.vue";
+import BlackjackChips from "./BlackjackChips.vue";
+import GameButtons from "./GameButtons.vue";
+import GameStatus from "./GameStatus.vue";
 
 // Import game logic
-import { blackjackGameLogic } from "./BlackjackGameLogic"; // The logic for the blackjack game
+import { blackjackGameLogic } from "./BlackjackGameLogic";
 
 export default {
   data() {
     return {
-      chips: 1000, // The player's current number of chips
-      bet: 0, // The current bet
-      message: "", // The message to display to the player
+      chips: 1000,
+      bet: 0,
+      message: "",
     };
   },
-  mixins: [blackjackGameLogic], // Include the blackjack game logic
+  mixins: [blackjackGameLogic],
   components: {
-    // Declare the components used in the template
     BlackjackHand,
     BlackjackChips,
     GameButtons,
     GameStatus,
   },
+  methods: {
+    placeBet(betAmount) {
+      this.placeBet(betAmount);
+    },
+  },
 };
 </script>
 
 <style>
-/* Add your CSS styling here to make the game visually appealing */
+/* Add your CSS styling here */
 </style>
