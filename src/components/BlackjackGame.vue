@@ -4,21 +4,21 @@
     <h1 class="game-title">Vue Blackjack 21</h1>
 
     <!-- Start Game Button -->
-    <button @click="startGame" v-if="!gameStarted">Start Game</button>
+    <button @click="startGame" v-if="!gameStatus.started">Start Game</button>
 
     <!-- Game Content -->
-    <div v-if="gameStarted">
+    <div v-if="gameStatus.started">
       <!-- Dealer's Hand -->
-      <BlackjackHand :cards="dealerHand" title="Dealer's Hand" />
+      <BlackjackHand :cards="dealer.hand" title="Dealer's Hand" />
 
       <!-- Player's Hand -->
-      <BlackjackHand :cards="playerHand" title="Player's Hand" />
+      <BlackjackHand :cards="player.hand" title="Player's Hand" />
 
       <!-- Buttons and Game Status -->
+      <!-- This component may need adjustment to receive new properties and events -->
       <GameButtons
-        :gameStarted="gameStarted"
-        :gameOver="gameOver"
-        :betPlaced="betPlaced"
+        :gameStatus="gameStatus"
+        :betPlaced="bet.placed"
         @startGame="startGame"
         @hit="hit"
         @stand="stand"
@@ -29,77 +29,80 @@
       <GameStatus :message="message" />
 
       <!-- Chips -->
-      <BlackjackChips :chips="chips" :bet="bet" />
+      <BlackjackChips :chips="player.chips" :bet="bet.current" />
 
       <!-- Betting Form -->
-      <form @submit.prevent="placeBet(bet)">
-        <input v-model.number="bet" type="number" min="0" max="chips" />
-        <button type="submit" :disabled="!gameStarted || betPlaced">
+      <form @submit.prevent="placeBet(bet.current)">
+        <input
+          v-model.number="bet.current"
+          type="number"
+          min="0"
+          :max="player.chips"
+        />
+        <button type="submit" :disabled="!gameStatus.started || bet.placed">
           Place Bet
         </button>
       </form>
 
       <!-- Debug lines -->
-      <p>Bet placed: {{ betPlaced }}</p>
-      <p>Game started: {{ gameStarted }}</p>
+      <p>Bet placed: {{ bet.placed }}</p>
+      <p>Game started: {{ gameStatus.started }}</p>
     </div>
   </div>
 </template>
 
 <script>
 // Import components
-import BlackjackHand from "./BlackjackHand.vue";
-import BlackjackChips from "./BlackjackChips.vue";
-import GameButtons from "./GameButtons.vue";
-import GameStatus from "./GameStatus.vue";
+import BlackjackHand from "./BlackjackHand.vue"; // Represents dealer's and player's hand
+import BlackjackChips from "./BlackjackChips.vue"; // Represents chips state
+import GameButtons from "./GameButtons.vue"; // Represents buttons to control the game
+import GameStatus from "./GameStatus.vue"; // Represents game status messages
 
-// Import game logic
-import { blackjackGameLogic } from "./BlackjackGameLogic";
+// Import game state
+import GameState from "./GameState.js"; // Represents game state and actions
 
 export default {
-  data() {
-    return {
-      chips: 1000,
-      bet: 0,
-      message: "",
-      gameStarted: false,
-      gameReady: false,
-      gameOver: false,
-      betPlaced: false,
-      dealerHand: [], // Add this line
-      playerHand: [], // Add this line
-    };
-  },
-  mixins: [blackjackGameLogic],
   components: {
     BlackjackHand,
     BlackjackChips,
     GameButtons,
     GameStatus,
   },
-  methods: {
-    startGame() {
-      // Game start logic should go here.
-      this.gameStarted = true;
-    },
-    placeBet(betAmount) {
-      // Make sure the game has started
-      if (!this.gameStarted) {
-        this.message = "Please start the game before placing a bet!";
-        return;
-      }
+  setup() {
+    // Use game state
+    const {
+      gameStatus,
+      bet,
+      player,
+      dealer,
+      message,
+      startGame,
+      placeBet,
+      hit, // Make sure to include 'hit' here
+    } = GameState();
 
-      // Make sure betAmount is less than or equal to chips
-      if (betAmount > this.chips) {
-        this.message = "Insufficient chips!";
-        return;
-      }
+    function stand() {
+      // TODO: Add game logic for 'stand'
+      console.log("Player stands!");
+    }
 
-      this.chips -= betAmount; // Reduce chips by the bet amount
-      this.gameReady = false; // Game is not ready for new round
-      this.bet = 0; // Reset bet
-      this.betPlaced = true;
-    },
+    function restartGame() {
+      // TODO: Add game logic for 'restartGame'
+      console.log("Game restarts!");
+    }
+
+    return {
+      gameStatus,
+      bet,
+      player,
+      dealer,
+      message,
+      startGame,
+      placeBet,
+      hit,
+      stand,
+      restartGame,
+    };
   },
 };
 </script>
