@@ -15,7 +15,6 @@
       <BlackjackHand :cards="player.hand" title="Player's Hand" />
 
       <!-- Buttons and Game Status -->
-      <!-- This component may need adjustment to receive new properties and events -->
       <GameButtons
         :gameStatus="gameStatus"
         :betPlaced="bet.placed"
@@ -36,7 +35,7 @@
         <input
           v-model.number="bet.current"
           type="number"
-          min="0"
+          min="1"
           :max="player.chips"
         />
         <button type="submit" :disabled="!gameStatus.started || bet.placed">
@@ -53,13 +52,13 @@
 
 <script>
 // Import components
-import BlackjackHand from "./BlackjackHand.vue"; // Represents dealer's and player's hand
-import BlackjackChips from "./BlackjackChips.vue"; // Represents chips state
-import GameButtons from "./GameButtons.vue"; // Represents buttons to control the game
-import GameStatus from "./GameStatus.vue"; // Represents game status messages
+import BlackjackHand from "./BlackjackHand.vue";
+import BlackjackChips from "./BlackjackChips.vue";
+import GameButtons from "./GameButtons.vue";
+import GameStatus from "./GameStatus.vue";
 
 // Import game state
-import GameState from "./GameState.js"; // Represents game state and actions
+import GameState from "./GameState.js";
 
 export default {
   components: {
@@ -69,7 +68,6 @@ export default {
     GameStatus,
   },
   setup() {
-    // Use game state
     const {
       gameStatus,
       bet,
@@ -77,17 +75,15 @@ export default {
       dealer,
       message,
       startGame,
-      placeBet,
-      hit, // Make sure to include 'hit' here
+      placeBet, // Import placeBet from GameState
+      hit,
     } = GameState();
 
     function stand() {
-      // TODO: Add game logic for 'stand'
       console.log("Player stands!");
     }
 
     function restartGame() {
-      // TODO: Add game logic for 'restartGame'
       console.log("Game restarts!");
     }
 
@@ -107,6 +103,4 @@ export default {
 };
 </script>
 
-<style>
-/* Add your CSS styling here */
-</style>
+<style></style>
