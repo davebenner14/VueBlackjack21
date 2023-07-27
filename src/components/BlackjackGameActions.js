@@ -12,6 +12,12 @@ export default function (gameState) {
 
   function startGame() {
     startGameOriginal();
+    // Draw two cards for the player and dealer
+    player.value.hand = [deck.drawCard(), deck.drawCard()];
+    dealer.value.hand = [
+      deck.drawCard(),
+      { ...deck.drawCard(), faceDown: true },
+    ];
   }
 
   function hit() {
@@ -26,8 +32,11 @@ export default function (gameState) {
   }
 
   function stand() {
+    // Flip the dealer's face-down card
+    dealer.value.hand[1].faceDown = false;
+
     let result = standDealer(dealer.value.hand, deck);
-    dealer.value.hand = result.dealerHand;
+    dealer.value.hand = result.dealerHand.map((card) => ({ ...card }));
 
     if (result.gameOver) {
       gameState.message.value = result.message;

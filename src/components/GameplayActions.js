@@ -18,11 +18,16 @@ export function hitPlayer(playerHand, deck) {
 }
 
 export function standDealer(dealerHand, deck) {
-  let dealerValue = calculateHandValue(dealerHand);
+  // Convert the dealer's hand back to simple card objects
+  let simpleDealerHand = dealerHand.map((card) =>
+    card.card ? card.card : card
+  );
+
+  let dealerValue = calculateHandValue(simpleDealerHand);
 
   while (dealerValue < 17) {
-    dealerHand.push(deck.value.pop());
-    dealerValue = calculateHandValue(dealerHand);
+    simpleDealerHand.push(deck.value.pop());
+    dealerValue = calculateHandValue(simpleDealerHand);
   }
 
   let gameOver = dealerValue > 21;
@@ -33,7 +38,7 @@ export function standDealer(dealerHand, deck) {
   }
 
   return {
-    dealerHand: dealerHand,
+    dealerHand: simpleDealerHand,
     message: message,
     gameOver: gameOver,
   };
