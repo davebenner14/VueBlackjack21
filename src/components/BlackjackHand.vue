@@ -1,21 +1,19 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
-    <div class="hand">
-      <div v-for="card in cards" :key="card">
-        {{ card.suit }} - {{ card.value }}
-      </div>
-    </div>
+    <ul>
+      <li v-for="(card, index) in cards" :key="index">
+        <span v-if="!isDealer || index !== 1 || !card.faceDown">
+          {{ card }}
+        </span>
+        <span v-else> Face Down </span>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    cards: Array,
-    title: String,
-  },
+  props: ["cards", "title", "isDealer"],
 };
 </script>
-
-<style></style>

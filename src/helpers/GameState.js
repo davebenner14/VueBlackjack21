@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { createDeck, shuffleDeck } from "../utils/CardUtils";
 
 export default function GameState() {
   // Game status
@@ -28,6 +29,9 @@ export default function GameState() {
   // Hand in progress
   const handInProgress = ref(false);
 
+  // Card deck
+  const deck = ref(shuffleDeck(createDeck())); // use createDeck function before shuffling
+
   // Game message
   const message = ref("");
 
@@ -54,6 +58,18 @@ export default function GameState() {
     bet.value.current = betAmount; // Set the current bet
     bet.value.placed = true;
     handInProgress.value = true;
+
+    // Deal the initial cards
+    dealInitialCards();
+  }
+
+  // Function to deal initial cards
+  function dealInitialCards() {
+    player.value.hand.push(deck.value.pop(), deck.value.pop());
+    dealer.value.hand.push(deck.value.pop(), {
+      faceDown: true,
+      card: deck.value.pop(),
+    });
   }
 
   // Validate game started method
@@ -98,6 +114,7 @@ export default function GameState() {
     bet,
     player,
     dealer,
+    deck,
     message,
     startGame,
     placeBet,

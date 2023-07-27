@@ -1,4 +1,4 @@
-import { calculateHandValue } from "./CardUtils";
+import { calculateHandValue } from "../utils/CardUtils";
 
 export function hitPlayer(playerHand, drawCard) {
   playerHand.push(drawCard());

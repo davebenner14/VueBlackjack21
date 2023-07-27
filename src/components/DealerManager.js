@@ -1,4 +1,4 @@
-import { calculateHandValue } from "./CardUtils";
+import { calculateHandValue } from "../utils/CardUtils";
 
 export function standDealer(dealerHand, drawCard) {
   while (calculateHandValue(dealerHand) < 17) {

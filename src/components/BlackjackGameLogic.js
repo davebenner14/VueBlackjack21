@@ -1,7 +1,7 @@
 import { createAndShuffleDeck } from "./DeckManager";
 import { hitPlayer } from "./PlayerManager";
 import { standDealer } from "./DealerManager";
-import { calculateHandValue } from "./CardUtils";
+import { calculateHandValue } from "../utils/CardUtils";
 import { GameInitialization } from "./GameInitialization";
 
 export const blackjackGameLogic = {

@@ -9,7 +9,7 @@
     <!-- Game Content -->
     <div v-if="gameStatus.started">
       <!-- Dealer's Hand -->
-      <BlackjackHand :cards="dealer.hand" title="Dealer's Hand" />
+      <BlackjackHand :cards="dealer.hand" title="Dealer's Hand" isDealer />
 
       <!-- Player's Hand -->
       <BlackjackHand :cards="player.hand" title="Player's Hand" />
@@ -52,18 +52,22 @@ import BlackjackHand from "./BlackjackHand.vue";
 import BlackjackChips from "./BlackjackChips.vue";
 import GameButtons from "./GameButtons.vue";
 import GameStatus from "./GameStatus.vue";
-import BettingForm from "./BettingForm.vue"; // New import
+import BettingForm from "./BettingForm.vue";
 
 // Import game state
-import GameState from "./GameState.js";
+import GameState from "../helpers/GameState"; // adjust the path to GameState file
+
+// Import utility functions
+import { calculateHandValue, shuffleDeck } from "../utils/CardUtils.js";
 
 export default {
+  name: "BlackjackGame",
   components: {
     BlackjackHand,
     BlackjackChips,
     GameButtons,
     GameStatus,
-    BettingForm, // New component
+    BettingForm,
   },
   setup() {
     const {
@@ -72,18 +76,29 @@ export default {
       player,
       dealer,
       message,
-      startGame, // Defined in GameState
-      placeBet, // Defined in GameState
-      hit, // Defined in GameState
+      startGame: startGameOriginal,
+      placeBet,
+      hit: hitOriginal,
     } = GameState();
 
+    function startGame() {
+      startGameOriginal();
+      player.hand = shuffleDeck(player.hand);
+      dealer.hand = shuffleDeck(dealer.hand);
+    }
+
+    function hit() {
+      hitOriginal();
+      player.hand = shuffleDeck(player.hand);
+    }
+
     function stand() {
-      // Defined here
       console.log("Player stands!");
+      console.log("Player's hand value: " + calculateHandValue(player.hand));
+      console.log("Dealer's hand value: " + calculateHandValue(dealer.hand));
     }
 
     function restartGame() {
-      // Defined here
       console.log("Game restarts!");
     }
 
