@@ -12,6 +12,7 @@ export default function (gameState) {
 
   function startGame() {
     startGameOriginal();
+
     // Draw two cards for the player and dealer
     player.value.hand = [deck.drawCard(), deck.drawCard()];
     dealer.value.hand = [
@@ -27,7 +28,6 @@ export default function (gameState) {
     if (result.gameOver) {
       gameState.message.value = result.message;
       gameState.gameStatus.value.ended = true;
-      gameState.gameStatus.value.started = false;
     }
   }
 
@@ -41,7 +41,6 @@ export default function (gameState) {
     if (result.gameOver) {
       gameState.message.value = result.message;
       gameState.gameStatus.value.ended = true;
-      gameState.gameStatus.value.started = false;
     } else {
       // Compare player and dealer hand
       compareHands();
@@ -63,11 +62,24 @@ export default function (gameState) {
     }
 
     gameState.gameStatus.value.ended = true;
+  }
+
+  function nextHand() {
+    // Reset the game state to initial state
     gameState.gameStatus.value.started = false;
+    gameState.gameStatus.value.ended = false;
+    gameState.dealerTurn.value = false;
+    gameState.bet.value.placed = false;
+    player.value.hand = [];
+    dealer.value.hand = [];
+
+    // Start a new game
+    startGame();
   }
 
   function restartGame() {
-    console.log("Game restarts!");
+    player.value.chips = 1000; // Reset player's chips
+    nextHand(); // Call nextHand function to reset other game states
   }
 
   return {
@@ -75,6 +87,7 @@ export default function (gameState) {
     placeBet,
     hit,
     stand,
+    nextHand,
     restartGame,
   };
 }

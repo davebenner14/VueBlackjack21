@@ -36,7 +36,7 @@ export default function GameState() {
   const handInProgress = ref(false);
 
   // Card deck
-  const deck = ref(shuffleDeck(createDeck())); // use createDeck function before shuffling
+  const deck = ref([]); // Empty array for the deck
 
   // Game message
   const message = ref("");
@@ -44,7 +44,6 @@ export default function GameState() {
   // Start game method
   function startGame() {
     gameStatus.value.started = true;
-    handInProgress.value = true;
   }
 
   // Place bet method
@@ -63,10 +62,13 @@ export default function GameState() {
     gameStatus.value.ready = true;
     bet.value.current = betAmount; // Set the current bet
     bet.value.placed = true;
-    handInProgress.value = true;
 
-    // Deal the initial cards
+    // Shuffle the deck and deal the initial cards only after the bet is placed
+    deck.value = shuffleDeck(createDeck());
     dealInitialCards();
+
+    // Start the hand in progress after dealing the initial cards
+    handInProgress.value = true;
   }
 
   // Function to deal initial cards

@@ -10,6 +10,9 @@
     >
       Stand
     </button>
+    <button @click="$emit('nextHand')" v-if="gameOver && gameStarted">
+      Next Hand
+    </button>
     <button @click="$emit('restartGame')" v-if="gameOver">Restart Game</button>
   </div>
 </template>
@@ -26,6 +29,9 @@ export default {
     },
     startGame() {
       this.$emit("startGame");
+    },
+    nextHand() {
+      this.$emit("nextHand");
     },
     restartGame() {
       this.$emit("restartGame");

@@ -27,6 +27,7 @@
         @startGame="startGame"
         @hit="hit"
         @stand="stand"
+        @nextHand="nextHand"
         @restartGame="restartGame"
       />
 

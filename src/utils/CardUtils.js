@@ -26,6 +26,7 @@ export function createDeck() {
   return deck;
 }
 
+// Function to calculate the hand value
 export function calculateHandValue(hand) {
   let value = 0;
   let aces = 0;
@@ -35,21 +36,21 @@ export function calculateHandValue(hand) {
       value += 10;
     } else if (card.value === "A") {
       value += 11;
-      aces += 1; // Count the number of aces
+      aces += 1;
     } else {
       value += parseInt(card.value);
     }
   });
 
-  // If value is over 21 and there are aces in the hand, start converting aces from 11 to 1
   while (value > 21 && aces > 0) {
-    value -= 10; // Convert an Ace from 11 to 1
-    aces -= 1; // We've used up one Ace
+    value -= 10;
+    aces -= 1;
   }
 
   return value;
 }
 
+// Function to shuffle the deck
 export function shuffleDeck(deck) {
   if (!deck || !Array.isArray(deck)) {
     console.error("Invalid deck provided for shuffling");
@@ -62,4 +63,14 @@ export function shuffleDeck(deck) {
   }
 
   return deck;
+}
+
+// Function to draw a card from the deck
+export function drawCard(deck) {
+  if (!deck || !Array.isArray(deck) || deck.length === 0) {
+    console.error("Invalid deck provided for drawing a card");
+    return null;
+  }
+
+  return deck.pop();
 }
