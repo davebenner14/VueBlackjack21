@@ -9,7 +9,12 @@
     <!-- Game Content -->
     <div v-if="gameStatus.started">
       <!-- Dealer's Hand -->
-      <BlackjackHand :cards="dealer.hand" title="Dealer's Hand" isDealer />
+      <BlackjackHand
+        :cards="dealer.hand"
+        title="Dealer's Hand"
+        :isDealer="true"
+        :dealerTurn="dealerTurn"
+      />
 
       <!-- Player's Hand -->
       <BlackjackHand :cards="player.hand" title="Player's Hand" />

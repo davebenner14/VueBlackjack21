@@ -33,10 +33,10 @@ export default function (gameState) {
 
   function stand() {
     // Flip the dealer's face-down card
-    dealer.value.hand[1].faceDown = false;
+    gameState.dealerTurn.value = true;
 
     let result = standDealer(dealer.value.hand, deck);
-    dealer.value.hand = result.dealerHand.map((card) => ({ ...card }));
+    dealer.value.hand = result.dealerHand;
 
     if (result.gameOver) {
       gameState.message.value = result.message;

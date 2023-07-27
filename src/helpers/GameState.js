@@ -1,5 +1,9 @@
 import { ref } from "vue";
-import { createDeck, shuffleDeck } from "../utils/CardUtils";
+import {
+  createDeck,
+  shuffleDeck,
+  calculateHandValue,
+} from "../utils/CardUtils";
 
 export default function GameState() {
   // Game status
@@ -9,6 +13,8 @@ export default function GameState() {
     over: false,
   });
 
+  // Dealer's turn
+  const dealerTurn = ref(false);
   // Bet data
   const bet = ref({
     current: 0,
@@ -85,6 +91,20 @@ export default function GameState() {
   function hit() {
     // Game logic for when a player hits
     console.log("Player hit!");
+    player.value.hand.push(deck.value.pop());
+
+    // Check if the player has bust after hitting
+    // If the player has bust, it's the dealer's turn
+    if (calculateHandValue(player.value.hand) > 21) {
+      dealerTurn.value = true;
+    }
+  }
+
+  // Stand function
+  function stand() {
+    // When the player stands, it's the dealer's turn
+    console.log("Player stands!");
+    dealerTurn.value = true;
   }
 
   // Function to decide the winner and update chips
@@ -119,7 +139,9 @@ export default function GameState() {
     startGame,
     placeBet,
     hit,
+    stand,
     handInProgress,
     endGame,
+    dealerTurn,
   };
 }
