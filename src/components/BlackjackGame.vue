@@ -32,6 +32,7 @@
 
       <!-- Betting Form -->
       <BettingForm
+        v-if="!bet.placed"
         :gameStatus="gameStatus"
         :bet="bet"
         :player="player"

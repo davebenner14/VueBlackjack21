@@ -1,28 +1,40 @@
 <template>
-  <form @submit.prevent="placeBet(bet.current)">
+  <form @submit.prevent="placeBetHandler">
     <input
-      v-model.number="bet.current"
+      v-model.number="localBet"
       type="number"
       min="1"
       :max="player.chips"
+      :disabled="handInProgress"
     />
-    <button type="submit" :disabled="!gameStatus.started || bet.placed">
+    <button
+      type="submit"
+      :disabled="!gameStatus.started || bet.placed || handInProgress"
+    >
       Place Bet
     </button>
   </form>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 export default {
-  props: ["gameStatus", "bet", "player", "placeBet"],
-  setup(props) {
-    const bet = ref(props.bet);
+  props: ["gameStatus", "bet", "player", "placeBet", "handInProgress"],
+  setup(props, { emit }) {
+    const localBet = ref(0);
+
+    watch(localBet, (newValue) => {
+      emit("updateBet", newValue);
+    });
+
+    const placeBetHandler = () => {
+      props.placeBet(localBet.value);
+    };
+
     return {
-      bet,
-      placeBet: props.placeBet,
-      gameStatus: props.gameStatus,
-      player: props.player,
+      ...props,
+      localBet,
+      placeBetHandler,
     };
   },
 };
