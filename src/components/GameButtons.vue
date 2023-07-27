@@ -17,6 +17,20 @@
 <script>
 export default {
   props: ["gameStarted", "gameOver", "betPlaced"],
+  methods: {
+    hit() {
+      this.$emit("hit");
+    },
+    stand() {
+      this.$emit("stand");
+    },
+    startGame() {
+      this.$emit("startGame");
+    },
+    restartGame() {
+      this.$emit("restartGame");
+    },
+  },
 };
 </script>
 

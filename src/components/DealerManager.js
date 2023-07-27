@@ -1,6 +1,6 @@
 import { calculateHandValue } from "../utils/CardUtils";
 
-export function standDealer(dealerHand, drawCard) {
+export function standDealerLocal(dealerHand, drawCard) {
   while (calculateHandValue(dealerHand) < 17) {
     dealerHand.push(drawCard());
   }

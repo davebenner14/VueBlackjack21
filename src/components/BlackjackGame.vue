@@ -16,7 +16,8 @@
 
       <!-- Buttons and Game Status -->
       <GameButtons
-        :gameStatus="gameStatus"
+        :gameStarted="gameStatus.started"
+        :gameOver="gameStatus.ended"
         :betPlaced="bet.placed"
         @startGame="startGame"
         @hit="hit"

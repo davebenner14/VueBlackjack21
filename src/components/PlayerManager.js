@@ -1,6 +1,6 @@
 import { calculateHandValue } from "../utils/CardUtils";
 
-export function hitPlayer(playerHand, drawCard) {
+export function hitPlayerLocal(playerHand, drawCard) {
   playerHand.push(drawCard());
   if (calculateHandValue(playerHand) > 21) {
     return {
