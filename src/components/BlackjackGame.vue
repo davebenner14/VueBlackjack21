@@ -71,16 +71,18 @@ export default {
       player,
       dealer,
       message,
-      startGame,
-      placeBet,
-      hit,
+      startGame, // Defined in GameState
+      placeBet, // Defined in GameState
+      hit, // Defined in GameState
     } = GameState();
 
     function stand() {
+      // Defined here
       console.log("Player stands!");
     }
 
     function restartGame() {
+      // Defined here
       console.log("Game restarts!");
     }
 
