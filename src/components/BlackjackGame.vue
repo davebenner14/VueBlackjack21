@@ -75,7 +75,7 @@ export default {
       dealer,
       message,
       startGame,
-      placeBet, // Import placeBet from GameState
+      placeBet,
       hit,
     } = GameState();
 

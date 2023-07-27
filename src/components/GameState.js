@@ -46,8 +46,7 @@ export default function GameState() {
 
     // Update chips, game status and bet
     player.value.chips -= betAmount;
-    gameStatus.value.ready = false;
-    bet.value.current = 0;
+    gameStatus.value.ready = true;
     bet.value.placed = true;
   }
 
