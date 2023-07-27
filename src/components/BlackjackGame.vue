@@ -47,18 +47,13 @@
 </template>
 
 <script>
-// Import components
 import BlackjackHand from "./BlackjackHand.vue";
 import BlackjackChips from "./BlackjackChips.vue";
 import GameButtons from "./GameButtons.vue";
 import GameStatus from "./GameStatus.vue";
 import BettingForm from "./BettingForm.vue";
-
-// Import game state
-import GameState from "../helpers/GameState"; // adjust the path to GameState file
-
-// Import utility functions
-import { calculateHandValue, shuffleDeck } from "../utils/CardUtils.js";
+import GameState from "../helpers/GameState";
+import gameActions from "./BlackjackGameActions.js";
 
 export default {
   name: "BlackjackGame",
@@ -70,49 +65,12 @@ export default {
     BettingForm,
   },
   setup() {
-    const {
-      gameStatus,
-      bet,
-      player,
-      dealer,
-      message,
-      startGame: startGameOriginal,
-      placeBet,
-      hit: hitOriginal,
-    } = GameState();
-
-    function startGame() {
-      startGameOriginal();
-      player.hand = shuffleDeck(player.hand);
-      dealer.hand = shuffleDeck(dealer.hand);
-    }
-
-    function hit() {
-      hitOriginal();
-      player.hand = shuffleDeck(player.hand);
-    }
-
-    function stand() {
-      console.log("Player stands!");
-      console.log("Player's hand value: " + calculateHandValue(player.hand));
-      console.log("Dealer's hand value: " + calculateHandValue(dealer.hand));
-    }
-
-    function restartGame() {
-      console.log("Game restarts!");
-    }
+    const gameState = GameState();
+    const gameFunctions = gameActions(gameState);
 
     return {
-      gameStatus,
-      bet,
-      player,
-      dealer,
-      message,
-      startGame,
-      placeBet,
-      hit,
-      stand,
-      restartGame,
+      ...gameState,
+      ...gameFunctions,
     };
   },
 };
