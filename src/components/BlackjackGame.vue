@@ -31,17 +31,12 @@
       <BlackjackChips :chips="player.chips" :bet="bet.current" />
 
       <!-- Betting Form -->
-      <form @submit.prevent="placeBet(bet.current)">
-        <input
-          v-model.number="bet.current"
-          type="number"
-          min="1"
-          :max="player.chips"
-        />
-        <button type="submit" :disabled="!gameStatus.started || bet.placed">
-          Place Bet
-        </button>
-      </form>
+      <BettingForm
+        :gameStatus="gameStatus"
+        :bet="bet"
+        :player="player"
+        :placeBet="placeBet"
+      />
 
       <!-- Debug lines -->
       <p>Bet placed: {{ bet.placed }}</p>
@@ -56,6 +51,7 @@ import BlackjackHand from "./BlackjackHand.vue";
 import BlackjackChips from "./BlackjackChips.vue";
 import GameButtons from "./GameButtons.vue";
 import GameStatus from "./GameStatus.vue";
+import BettingForm from "./BettingForm.vue"; // New import
 
 // Import game state
 import GameState from "./GameState.js";
@@ -66,6 +62,7 @@ export default {
     BlackjackChips,
     GameButtons,
     GameStatus,
+    BettingForm, // New component
   },
   setup() {
     const {

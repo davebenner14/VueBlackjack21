@@ -26,6 +26,4 @@ export default {
 };
 </script>
 
-<style>
-/* Add your CSS styling here for the game buttons */
-</style>
+<style></style>

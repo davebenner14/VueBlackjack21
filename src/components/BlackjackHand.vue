@@ -18,6 +18,4 @@ export default {
 };
 </script>
 
-<style>
-/* Add CSS styling for the BlackjackHand component here */
-</style>
+<style></style>
