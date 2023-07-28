@@ -79,4 +79,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style src="../styles/GameContainer.css"></style>
