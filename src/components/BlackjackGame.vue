@@ -45,10 +45,6 @@
         :player="player"
         :placeBet="placeBet"
       />
-
-      <!-- Debug lines -->
-      <p>Bet placed: {{ bet.placed }}</p>
-      <p>Game started: {{ gameStatus.started }}</p>
     </div>
   </div>
 </template>
