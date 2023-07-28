@@ -58,7 +58,7 @@ export default function (gameState) {
       gameState.message.value = "Dealer Wins!";
     } else {
       gameState.message.value = "Push!";
-      player.value.chips += gameState.bet.value.current; // Return the bet to the player
+      player.value.chips += gameState.bet.value.current;
     }
 
     gameState.gameStatus.value.ended = true;
