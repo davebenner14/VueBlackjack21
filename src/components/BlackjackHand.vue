@@ -2,12 +2,10 @@
   <div>
     <h2 v-if="isDealer">{{ title }} (Total: {{ totalVisibleValue }})</h2>
     <h2 v-else>{{ title }} (Total: {{ totalValue }})</h2>
-    <ul>
+    <ul class="hand">
       <li v-for="(card, index) in cards" :key="index">
-        <span v-if="!isDealer || index !== 1 || dealerTurn">
-          {{ card }}
-        </span>
-        <span v-else> Face Down </span>
+        <Card :card="card" v-if="!isDealer || index !== 1 || dealerTurn" />
+        <div class="card back" v-else></div>
       </li>
     </ul>
   </div>
@@ -15,8 +13,12 @@
 
 <script>
 import { calculateHandValue } from "../utils/CardUtils";
+import Card from "./PlayingCard.vue";
 
 export default {
+  components: {
+    Card,
+  },
   props: ["cards", "title", "isDealer", "dealerTurn"],
   computed: {
     totalValue() {
@@ -30,3 +32,5 @@ export default {
   },
 };
 </script>
+
+<style src="../styles/Card.css"></style>
