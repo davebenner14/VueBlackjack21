@@ -73,6 +73,9 @@ export default function (gameState) {
     player.value.hand = [];
     dealer.value.hand = [];
 
+    // Clear the message from previous round
+    gameState.message.value = "";
+
     // Start a new game
     startGame();
   }
