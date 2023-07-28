@@ -41,6 +41,11 @@ export default function (gameState) {
     if (result.gameOver) {
       gameState.message.value = result.message;
       gameState.gameStatus.value.ended = true;
+
+      // If dealer busted, player wins. Double the bet and add to player's chips.
+      if (result.message === "Dealer Busted!") {
+        player.value.chips += gameState.bet.value.current * 2;
+      }
     } else {
       // Compare player and dealer hand
       compareHands();
@@ -53,14 +58,15 @@ export default function (gameState) {
 
     if (playerValue > dealerValue || dealerValue > 21) {
       gameState.message.value = "Player Wins!";
-      player.value.chips += gameState.bet.value.current * 2;
+      player.value.chips += gameState.bet.value.current * 2; // winnings + initial bet
     } else if (playerValue < dealerValue) {
       gameState.message.value = "Dealer Wins!";
     } else {
       gameState.message.value = "Push!";
-      player.value.chips += gameState.bet.value.current;
+      player.value.chips += gameState.bet.value.current; // return the bet to the player
     }
 
+    gameState.bet.value.current = 0; // Reset the current bet after each round
     gameState.gameStatus.value.ended = true;
   }
 
