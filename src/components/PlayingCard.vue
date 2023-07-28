@@ -36,7 +36,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .card {
   width: 60px;
@@ -46,6 +45,11 @@ export default {
   padding: 5px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
   position: relative;
+}
+
+.value {
+  font-size: 20px;
+  color: black; /* Set the default color for the card numbers to black */
 }
 
 .symbol {
@@ -72,13 +76,33 @@ export default {
   transform: rotate(180deg);
 }
 
+.hearts .value,
+.diamonds .value {
+  color: red; /* Set the color of the card numbers to red for hearts and diamonds */
+}
+
+.spades .value,
+.clubs .value {
+  color: black; /* Set the color of the card numbers to black for spades and clubs */
+}
+
 .hearts .symbol,
 .diamonds .symbol {
-  color: red;
+  color: red; /* Set the color of the card symbol to red for hearts and diamonds */
 }
 
 .spades .symbol,
 .clubs .symbol {
-  color: black;
+  color: black; /* Set the color of the card symbol to black for spades and clubs */
+}
+
+.hearts .bottom-corner,
+.diamonds .bottom-corner {
+  color: red; /* Set the color of the bottom corner to red for hearts and diamonds */
+}
+
+.spades .bottom-corner,
+.clubs .bottom-corner {
+  color: black; /* Set the color of the bottom corner to black for spades and clubs */
 }
 </style>

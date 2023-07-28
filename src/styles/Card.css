@@ -10,11 +10,11 @@
   align-items: center;
   justify-content: center;
   font-family: "Arial", sans-serif;
-  color: white;
 }
 
 .card .value {
   font-size: 18px;
+  color: black; /* Set the default color for the card numbers and letters */
 }
 
 .card .suit {
