@@ -96,12 +96,3 @@ export default {
 </script>
 
 <style src="../styles/GameContainer.css"></style>
-
-<!-- Add this to your GameContainer.css or similar file -->
-<style>
-.player-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-</style>
