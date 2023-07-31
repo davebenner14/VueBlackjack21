@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="total-container" v-if="isDealer">
-      <h2>{{ title }}</h2>
+      <h2><span class="emoji-dealer">🎩</span> {{ title }}</h2>
       <h3 class="total">{{ totalVisibleValue }}</h3>
     </div>
     <div class="total-container" v-else>
-      <h2>{{ title }}</h2>
+      <h2><span class="emoji-player">🤠</span> {{ title }}</h2>
       <h3 class="total">{{ totalValue }}</h3>
     </div>
     <ul class="hand">
@@ -34,7 +34,6 @@ export default {
       return calculateHandValue(this.cards.map((card) => card.card || card));
     },
     totalVisibleValue() {
-      // Include only face-up cards in the total, regardless of the turn.
       const faceUpCards = this.cards.filter((card) => !card.faceDown);
       return calculateHandValue(faceUpCards.map((card) => card.card || card));
     },
@@ -58,8 +57,31 @@ export default {
 }
 
 .total {
-  font-size: 40px; /* adjust this value to suit your needs */
-  margin: 20px 0; /* adjust these values to add more or less space above and below */
+  font-size: 60px;
+  margin: 20px 0;
+  line-height: 100px;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(53, 181, 113);
+  color: white; /* Text color */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black; /* Circle border */
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; /* Text outline */
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-dealer,
+.emoji-player {
+  font-size: 30px;
+  margin-right: 10px;
 }
 
 .card.back {
