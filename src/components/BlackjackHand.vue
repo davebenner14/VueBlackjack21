@@ -1,7 +1,13 @@
 <template>
   <div>
-    <h2 v-if="isDealer">{{ title }} (Total: {{ totalVisibleValue }})</h2>
-    <h2 v-else>{{ title }} (Total: {{ totalValue }})</h2>
+    <div class="total-container" v-if="isDealer">
+      <h2>{{ title }}</h2>
+      <h3 class="total">{{ totalVisibleValue }}</h3>
+    </div>
+    <div class="total-container" v-else>
+      <h2>{{ title }}</h2>
+      <h3 class="total">{{ totalValue }}</h3>
+    </div>
     <ul class="hand">
       <li v-for="(card, index) in cards" :key="index">
         <PlayingCard
@@ -37,11 +43,23 @@ export default {
 </script>
 
 <style scoped>
+.total-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .hand {
   display: flex;
+  justify-content: center;
   gap: 10px;
   list-style: none;
   padding: 0;
+}
+
+.total {
+  font-size: 40px; /* adjust this value to suit your needs */
+  margin: 20px 0; /* adjust these values to add more or less space above and below */
 }
 
 .card.back {

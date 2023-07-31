@@ -87,8 +87,8 @@ export default function (gameState) {
   }
 
   function restartGame() {
-    player.value.chips = 1000; // Reset player's chips
-    nextHand(); // Call nextHand function to reset other game states
+    player.value.chips = 1000;
+    nextHand();
   }
 
   return {
