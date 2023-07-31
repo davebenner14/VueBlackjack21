@@ -17,6 +17,9 @@
         :dealerTurn="dealerTurn"
       />
 
+      <!-- Game Status -->
+      <GameStatus class="game-message" :message="message" />
+
       <!-- Player's Section -->
       <div class="player-section">
         <div class="player-chips-bet">
@@ -58,9 +61,6 @@
           @restartGame="restartGame"
         />
       </div>
-
-      <!-- Game Status -->
-      <GameStatus :message="message" />
     </div>
   </div>
 </template>

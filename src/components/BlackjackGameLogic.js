@@ -67,16 +67,17 @@ export const blackjackGameLogic = {
       let playerValue = calculateHandValue(this.playerHand);
       let dealerValue = calculateHandValue(this.dealerHand);
       if (playerValue > dealerValue) {
-        this.message = "Player wins!";
+        this.message = "💰 Player wins!";
         this.chips += this.bet * 2;
       } else if (dealerValue > playerValue) {
-        this.message = "Dealer wins!";
+        this.message = "😵‍💫 Dealer wins!";
       } else {
         this.message = "It's a push!";
         this.chips += this.bet;
       }
       this.gameOver = true;
     },
+
     checkForBlackjack() {
       let playerValue = calculateHandValue(this.playerHand);
       let dealerValue = calculateHandValue(this.dealerHand);

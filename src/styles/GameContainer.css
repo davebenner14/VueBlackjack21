@@ -78,3 +78,11 @@ body {
 .player-hand {
   margin-top: 100px;
 }
+.game-message {
+  font-family: "Papyrus", "Arial", sans-serif; /* Substitute with any fancy font you like */
+  font-size: 2em; /* Adjust size as needed */
+  color: gold;
+  text-shadow: 2px 2px 4px #000000;
+  text-align: center;
+  padding: 10px;
+}
