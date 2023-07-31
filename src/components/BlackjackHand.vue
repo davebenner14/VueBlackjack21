@@ -50,8 +50,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 90px;
+  width: 120px;
+  height: 180px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   font-size: 20px;

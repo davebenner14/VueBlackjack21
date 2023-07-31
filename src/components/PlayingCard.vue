@@ -2,14 +2,12 @@
   <div class="card" :class="card.suit">
     <div class="top-corner">
       <span class="value">{{ card.value }}</span>
-      <span class="symbol">{{ getSymbol() }}</span>
     </div>
-    <div class="symbol center-symbol" v-if="isPictureCard">
+    <div class="symbol center-symbol">
       {{ getSymbol() }}
     </div>
     <div class="bottom-corner">
       <span class="value">{{ card.value }}</span>
-      <span class="symbol">{{ getSymbol() }}</span>
     </div>
   </div>
 </template>
@@ -30,16 +28,14 @@ export default {
           return "♠";
       }
     },
-    isPictureCard() {
-      return ["J", "Q", "K", "A"].includes(this.card.value);
-    },
   },
 };
 </script>
+
 <style scoped>
 .card {
-  width: 60px;
-  height: 90px;
+  width: 120px;
+  height: 180px;
   background-color: white;
   border-radius: 5px;
   padding: 5px;
@@ -49,11 +45,10 @@ export default {
 
 .value {
   font-size: 20px;
-  color: black; /* Set the default color for the card numbers to black */
 }
 
 .symbol {
-  font-size: 20px;
+  font-size: 120px; /* making the center symbol even larger */
 }
 
 .center-symbol {
@@ -78,31 +73,21 @@ export default {
 
 .hearts .value,
 .diamonds .value {
-  color: red; /* Set the color of the card numbers to red for hearts and diamonds */
+  color: red;
 }
 
 .spades .value,
 .clubs .value {
-  color: black; /* Set the color of the card numbers to black for spades and clubs */
+  color: black;
 }
 
 .hearts .symbol,
 .diamonds .symbol {
-  color: red; /* Set the color of the card symbol to red for hearts and diamonds */
+  color: red;
 }
 
 .spades .symbol,
 .clubs .symbol {
-  color: black; /* Set the color of the card symbol to black for spades and clubs */
-}
-
-.hearts .bottom-corner,
-.diamonds .bottom-corner {
-  color: red; /* Set the color of the bottom corner to red for hearts and diamonds */
-}
-
-.spades .bottom-corner,
-.clubs .bottom-corner {
-  color: black; /* Set the color of the bottom corner to black for spades and clubs */
+  color: black;
 }
 </style>
