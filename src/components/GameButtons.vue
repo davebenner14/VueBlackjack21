@@ -7,18 +7,21 @@
     >
       Start Game
     </button>
-    <div class="game-button-group">
+    <div
+      class="game-button-group"
+      :style="{ visibility: gameStarted ? 'visible' : 'hidden' }"
+    >
       <button
         class="game-button hit-button"
         @click="$emit('hit')"
-        v-if="gameStarted && !gameOver && betPlaced"
+        :disabled="!gameStarted || gameOver || !betPlaced"
       >
         Hit
       </button>
       <button
         class="game-button stand-button"
         @click="$emit('stand')"
-        v-if="gameStarted && !gameOver && betPlaced"
+        :disabled="!gameStarted || gameOver || !betPlaced"
       >
         Stand
       </button>
@@ -64,56 +67,60 @@ export default {
   },
 };
 </script>
-
 <style>
 .game-button-group {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* this will give some space between your buttons */
+  gap: 10px;
 }
 
 .game-button {
-  border-radius: 50px; /* gives the buttons an oval shape */
-  color: white; /* white text */
-  padding: 10px 20px; /* button size, adjust as needed */
-  font-size: 1.2em; /* font size, adjust as needed */
-  border: none; /* removes default border */
-  transition: 0.3s; /* smooth hover effect */
+  border-radius: 50px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  transition: 0.3s;
 }
 
 .hit-button {
-  background-color: transparent; /* transparent background */
-  border: 2px solid blue; /* blue border */
+  background-color: transparent;
+  border: 2px solid blue;
 }
 
 .hit-button:hover {
-  background-color: blue; /* blue background on hover */
+  background-color: blue;
 }
 
 .stand-button {
-  background-color: transparent; /* transparent background */
-  border: 2px solid red; /* red border */
+  background-color: transparent;
+  border: 2px solid red;
 }
 
 .stand-button:hover {
-  background-color: red; /* red background on hover */
+  background-color: red;
 }
 
 .next-button {
-  background-color: transparent; /* transparent background */
-  border: 2px solid green; /* green border */
+  background-color: transparent;
+  border: 2px solid green;
 }
 
 .next-button:hover {
-  background-color: green; /* green background on hover */
+  background-color: green;
 }
 
 .restart-button {
-  background-color: transparent; /* transparent background */
-  border: 2px solid yellow; /* yellow border */
+  background-color: transparent;
+  border: 2px solid yellow;
 }
 
 .restart-button:hover {
-  background-color: yellow; /* yellow background on hover */
+  background-color: yellow;
+}
+
+.game-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>

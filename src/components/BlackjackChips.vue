@@ -18,6 +18,7 @@ export default {
 <style scoped>
 .chips {
   text-align: center;
+  min-width: 150px; /* or any value that is wide enough for your largest possible content */
 }
 
 .chip-circle {

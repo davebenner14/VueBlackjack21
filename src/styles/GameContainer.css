@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding-top: 20px; /* Added to ensure the title isn't cut off */
+  padding-top: 20px;
   background: linear-gradient(to bottom right, green, black);
 }
 
@@ -16,9 +16,9 @@
 }
 
 .game-title {
-  font-size: 3em; /* Increased font size for better visibility */
+  font-size: 3em;
   text-align: center;
-  margin: 20px 0; /* Add margin to top and bottom */
+  margin: 20px 0;
   color: white;
   text-shadow: 0px 0px 5px #fff, 0px 0px 10px #fff, 0px 0px 15px #fff,
     0px 0px 20px #fff, 0px 0px 25px #fff, 0px 0px 30px #ff4da6,
@@ -53,22 +53,37 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%; /* Adjust this to control the amount of space */
+  width: 80%;
 }
 
 .player-chips-bet {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 50px; /* Creates a gap of 50px to the left of player's hand */
+  margin-left: 5%;
 }
 
 .player-chips-bet > * {
-  margin-bottom: 20px; /* Creates a gap of 20px between the BlackjackChips and BettingForm */
+  margin-bottom: 20px;
+}
+
+.player-hand-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
 }
 
 .player-buttons {
-  margin-right: 50px; /* Creates a gap of 50px to the right of player's hand */
+  margin-right: 50px;
+}
+
+.game-button-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 10%;
 }
 
 .dealer-hand {
@@ -78,9 +93,10 @@ body {
 .player-hand {
   margin-top: 100px;
 }
+
 .game-message {
-  font-family: "Papyrus", "Arial", sans-serif; /* Substitute with any fancy font you like */
-  font-size: 2em; /* Adjust size as needed */
+  font-family: "Papyrus", "Arial", sans-serif;
+  font-size: 2em;
   color: gold;
   text-shadow: 2px 2px 4px #000000;
   text-align: center;

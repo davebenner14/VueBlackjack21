@@ -41,25 +41,29 @@
           />
         </div>
 
-        <!-- Player's Hand -->
-        <BlackjackHand
-          class="player-hand"
-          :cards="player.hand"
-          title="Player's Hand"
-        />
+        <div class="player-hand-container">
+          <!-- Player's Hand -->
+          <BlackjackHand
+            class="player-hand"
+            :cards="player.hand"
+            title="Player's Hand"
+          />
+        </div>
 
-        <!-- Game Buttons -->
-        <GameButtons
-          class="player-buttons"
-          :gameStarted="gameStatus.started"
-          :gameOver="gameStatus.ended"
-          :betPlaced="bet.placed"
-          @startGame="startGame"
-          @hit="hit"
-          @stand="stand"
-          @nextHand="nextHand"
-          @restartGame="restartGame"
-        />
+        <div class="game-button-group">
+          <!-- Game Buttons -->
+          <GameButtons
+            class="player-buttons"
+            :gameStarted="gameStatus.started"
+            :gameOver="gameStatus.ended"
+            :betPlaced="bet.placed"
+            @startGame="startGame"
+            @hit="hit"
+            @stand="stand"
+            @nextHand="nextHand"
+            @restartGame="restartGame"
+          />
+        </div>
       </div>
     </div>
   </div>
