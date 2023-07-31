@@ -7,7 +7,7 @@
     <button @click="startGame" v-if="!gameStatus.started">Start Game</button>
 
     <!-- Game Content -->
-    <div v-if="gameStatus.started">
+    <div v-if="gameStatus.started" class="game-content">
       <!-- Dealer's Hand -->
       <BlackjackHand
         class="dealer-hand"
@@ -17,39 +17,50 @@
         :dealerTurn="dealerTurn"
       />
 
-      <!-- Player's Hand -->
-      <BlackjackHand
-        class="player-hand"
-        :cards="player.hand"
-        title="Player's Hand"
-      />
+      <!-- Player's Section -->
+      <div class="player-section">
+        <div class="player-chips-bet">
+          <!-- Player's Chips and Bet -->
+          <BlackjackChips
+            class="betting-elements"
+            :chips="player.chips"
+            :bet="bet.current"
+          />
 
-      <!-- Buttons and Game Status -->
-      <GameButtons
-        :gameStarted="gameStatus.started"
-        :gameOver="gameStatus.ended"
-        :betPlaced="bet.placed"
-        @startGame="startGame"
-        @hit="hit"
-        @stand="stand"
-        @nextHand="nextHand"
-        @restartGame="restartGame"
-      />
+          <!-- Betting Form -->
+          <BettingForm
+            class="betting-elements"
+            v-if="!bet.placed"
+            :gameStatus="gameStatus"
+            :bet="bet"
+            :player="player"
+            :placeBet="placeBet"
+          />
+        </div>
+
+        <!-- Player's Hand -->
+        <BlackjackHand
+          class="player-hand"
+          :cards="player.hand"
+          title="Player's Hand"
+        />
+
+        <!-- Game Buttons -->
+        <GameButtons
+          class="player-buttons"
+          :gameStarted="gameStatus.started"
+          :gameOver="gameStatus.ended"
+          :betPlaced="bet.placed"
+          @startGame="startGame"
+          @hit="hit"
+          @stand="stand"
+          @nextHand="nextHand"
+          @restartGame="restartGame"
+        />
+      </div>
 
       <!-- Game Status -->
       <GameStatus :message="message" />
-
-      <!-- Chips -->
-      <BlackjackChips :chips="player.chips" :bet="bet.current" />
-
-      <!-- Betting Form -->
-      <BettingForm
-        v-if="!bet.placed"
-        :gameStatus="gameStatus"
-        :bet="bet"
-        :player="player"
-        :placeBet="placeBet"
-      />
     </div>
   </div>
 </template>
@@ -85,3 +96,12 @@ export default {
 </script>
 
 <style src="../styles/GameContainer.css"></style>
+
+<!-- Add this to your GameContainer.css or similar file -->
+<style>
+.player-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>

@@ -40,4 +40,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+form {
+  font-size: 2em;
+}
+
+input[type="number"] {
+  color: gold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+</style>

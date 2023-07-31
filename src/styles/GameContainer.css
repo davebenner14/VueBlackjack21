@@ -8,6 +8,13 @@
   background: linear-gradient(to bottom right, green, black);
 }
 
+.game-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .game-title {
   font-size: 3em; /* Increased font size for better visibility */
   text-align: center;
@@ -35,6 +42,33 @@
 
 body {
   color: white;
+}
+
+.dealer-hand,
+.player-hand {
+  margin: 20px;
+}
+
+.player-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%; /* Adjust this to control the amount of space */
+}
+
+.player-chips-bet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 50px; /* Creates a gap of 50px to the left of player's hand */
+}
+
+.player-chips-bet > * {
+  margin-bottom: 20px; /* Creates a gap of 20px between the BlackjackChips and BettingForm */
+}
+
+.player-buttons {
+  margin-right: 50px; /* Creates a gap of 50px to the right of player's hand */
 }
 
 .dealer-hand {
