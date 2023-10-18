@@ -1,4 +1,4 @@
-# 📝 Vue Blackjack 21 📝
+# 🃏 Vue Blackjack 21 🃏
 
 Welcome to the Vue Blackjack 21 GitHub repository! This dynamic project takes your gaming experience to the next level with Vue.js. With our interactive and sleek user interface, you can play one of the most popular casino games - Blackjack - right in your browser. Whether you're an experienced player or new to the game, Vue Blackjack 21 is designed to provide a fun and engaging gameplay experience. The game is responsive and user-friendly, offering features such as dynamic betting, game control buttons for hit, stand, and restart, and real-time updates on your game status. Plus, the dealer's AI is designed to keep the game challenging and exciting. Brace yourself for the fun and excitement, and try your luck with Vue Blackjack 21! Whether you hit or stand, the fun never ends with Vue Blackjack 21!
 
